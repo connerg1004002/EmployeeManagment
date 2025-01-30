@@ -1,9 +1,9 @@
 ﻿public class Program {
   public static void Main() {
     //Instantiate
-    FullTimeEmployee fullTime = new FullTimeEmployee(0, "Jana Jansen", "Math", 60000, 12000);
-    PartTimeEmployee partTime = new PartTimeEmployee(1, "Scott Pilgrim", "Janitorial", new decimal(14.501), 80);
-    Contractor contracted = new Contractor(2, "Dale Dimmadome", "Construction", 120000, new DateTime(2025, 2, 27), false);
+    FullTimeEmployee fullTime = new FullTimeEmployee("Jana Jansen", 0, "Math", 60000, 12000);
+    PartTimeEmployee partTime = new PartTimeEmployee("Scott Pilgrim", 1, "Janitorial", new decimal(14.5), 80);
+    Contractor contracted = new Contractor("Dale Dimmadome", 2, "Construction", 120000, new DateTime(2025, 2, 27), false);
 
 
     //Print info

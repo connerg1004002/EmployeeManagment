@@ -1,17 +1,26 @@
-﻿//Abstract employee class
-public abstract class Employee {
+﻿//employee base class
+public class Employee {
   //Private variables exposed by public variables
 
-  private int _id;
   private string _name;
+  private int _id;
   private string _department;
   private decimal _baseSalary;
 
   //The public variables
-  public int ID { get => _id; set => _id = value; }
   public string Name { get => _name; set => _name = value; }
+  public int ID { get => _id; set => _id = value; }
   public string Department { get => _department; set => _department = value; }
   public decimal BaseSalary { get => _baseSalary; set => _baseSalary = value; }
+
+
+  //Constructor
+  public Employee(string name, int id, string department, decimal baseSalary) {
+    Name = name;
+    ID = id;
+    Department = department;
+    BaseSalary = baseSalary;
+  }
 
 
   //Normal virtual functions
@@ -20,13 +29,15 @@ public abstract class Employee {
   }
 
   public override string ToString() {
-    return $"Employee {Name} has ID {ID} in department {Department}, with a salary of {BaseSalary}";
+    return $"Name: {Name}, ID: {ID}, Department: {Department}, BaseSalary: {BaseSalary}";
   }
   
   public virtual void DisplayEmployeeDetails() {
     Console.WriteLine(this.ToString());
   }
 }
+
+
 
 
 //Full time gets a bonus as well
@@ -37,11 +48,7 @@ public class FullTimeEmployee : Employee {
 
 
   //Constructor
-  public FullTimeEmployee(int id, string name, string department, decimal baseSalary, decimal annualBonus) {
-    ID = id;
-    Name = name;
-    Department = department;
-    BaseSalary = baseSalary;
+  public FullTimeEmployee(string name, int id, string department, decimal baseSalary, decimal annualBonus) : base(name, id, department, baseSalary) {
     AnnualBonus = annualBonus;
   }
 
@@ -52,9 +59,11 @@ public class FullTimeEmployee : Employee {
   }
 
   public override string ToString() {
-    return $"Full time employee {Name} has ID {ID} in department {Department}, with a salary of {BaseSalary} and annual bonus of {AnnualBonus}";
+    return $"Full time, Name: {Name}, ID: {ID}, Department: {Department}, BaseSalary: {BaseSalary}, AnnualBonus: {AnnualBonus}";
   }
 };
+
+
 
 
 //Part time are payed hourly
@@ -67,10 +76,7 @@ public class PartTimeEmployee : Employee {
 
 
   //Constructor
-  public PartTimeEmployee(int id, string name, string department, decimal hourlyRate, int hoursWorked) {
-    ID = id;
-    Name = name;
-    Department = department;
+  public PartTimeEmployee(string name, int id, string department, decimal hourlyRate, int hoursWorked) : base(name, id, department, 0) {
     HourlyRate = hourlyRate;
     HoursWorked = hoursWorked;
   }
@@ -82,9 +88,10 @@ public class PartTimeEmployee : Employee {
   }
 
   public override string ToString() {
-    return $"Part time employee {Name} has ID {ID} in department {Department}, with an hourly rate of {HourlyRate} and has worked {HoursWorked} hours";
+    return $"Part time, Name: {Name}, ID: {ID}, Department: {Department}, HourlyRate: {HourlyRate}, HoursWorked: {HoursWorked}";
   }
 };
+
 
 
 
@@ -98,11 +105,7 @@ public class Contractor : Employee {
 
 
   //Constructor
-  public Contractor(int id, string name, string department, decimal baseSalary, DateTime contractExpiryDate, bool wasPayed) {
-    ID = id;
-    Name = name;
-    Department = department;
-    BaseSalary = baseSalary;
+  public Contractor(string name, int id, string department, decimal baseSalary, DateTime contractExpiryDate, bool wasPayed) : base(name, id, department, baseSalary) {
     ContractExpiryDate = contractExpiryDate;
     WasPayed = wasPayed;
   }
@@ -122,6 +125,6 @@ public class Contractor : Employee {
   }
 
   public override string ToString() {
-    return $"Contracted employee {Name} has ID {ID} in department {Department}, and will be payed {BaseSalary} on {ContractExpiryDate:d}.  Has {(WasPayed ? "" : "not ")}been payed";
+    return $"Contracted, Name: {Name}, ID: {ID}, Department: {Department}, BaseSalary: {BaseSalary}, ContractExpiryDate: {ContractExpiryDate:d}, WasPayed: {WasPayed}";
   }
 };
